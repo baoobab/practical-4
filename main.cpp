@@ -1,5 +1,6 @@
 #include <iostream>
-#include <cstring>
+#include <Windows.h>
+#include <clocale>
 using namespace std;
 
 
@@ -79,6 +80,9 @@ void getSubstring(const char arr[], char substring[], int start, int end) {
 
 
 int main() {
+    // If when entering RU characters there are hieroglyphs, then write the command in the console: chcp 1251
+    SetConsoleCP(1251); // Setting the input encoding
+    SetConsoleOutputCP(1251); // Setting the output encoding
     setlocale(LC_ALL, "Russian");
 
     cout << "Navigation:" << "\n"
@@ -155,31 +159,9 @@ int main() {
                 break;
             }
             case 4: {   
-                char currentWord[MAX_SIZE] = {};
-                if (!checkSymbolInWord(punctuation, sequence[0])) {
-                    currentWord[0] = sequence[0];
-                }
-                int curIndex = 1;
-                for (int i = 1; i < getWordLength(sequence) - 1; i++) {
-                    if (sequence[i] != ' ') {
-                        if (!checkSymbolInWord(punctuation, sequence[i]) || 
-                        (checkSymbolInWord(punctuation, sequence[i]) && 
-                        (sequence[i - 1] == ' ' || 
-                        sequence[i + 1] == ' '))) {
-                            currentWord[curIndex] = tolower(sequence[i]);
-                            curIndex++;
-                        }
-                    } else {
-                        currentWord[curIndex] = '\0';
-                        replaceDigitsWithLetters(currentWord);
-                        cout << currentWord << " ";
-                        curIndex = 0;
-                        clearArray(currentWord, MAX_SIZE);
-                    }
-                }
-                replaceDigitsWithLetters(currentWord);
-                cout << currentWord << ".\n";
-             
+                replaceDigitsWithLetters(sequence);
+                cout << "Replaced text:\n";
+                cout << sequence << "\n";
                 break;
             }
             case 5: {
