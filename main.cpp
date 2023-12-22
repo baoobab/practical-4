@@ -137,16 +137,16 @@ int main() {
             }
             case 3: {
                 int startIndex = 0;
-                char ccurrentWord[MAX_SIZE] = {};
+                char currentWord[MAX_SIZE] = {};
 
                 for (int i = 0; i < getWordLength(sequence) + 1; i++) {
                     if (sequence[i] == ' ' || sequence[i] == '\0') {
-                        clearArray(ccurrentWord, MAX_SIZE);
-                        getSubstring(sequence, ccurrentWord, startIndex, i);
+                        clearArray(currentWord, MAX_SIZE);
+                        getSubstring(sequence, currentWord, startIndex, i);
                         startIndex = i + 1;
-                        for (int j = 0; j < getWordLength(ccurrentWord); j++) {
-                            if (countOccurrences(ccurrentWord, ccurrentWord[j]) > 1) {
-                                cout << ccurrentWord << " ";
+                        for (int j = 0; j < getWordLength(currentWord); j++) {
+                            if (countOccurrences(currentWord, currentWord[j]) > 1) {
+                                cout << currentWord << " ";
                                 break;
                             }
                         }
