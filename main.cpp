@@ -94,7 +94,7 @@ int main() {
 
     const int MAX_SIZE = 500;
     char sequence[MAX_SIZE];
-    const char punctuation[] = { '.', ';', ':', '(', ')', '!', '?', ',', '&', '*', '/', '<', '>', '?', '«', '»', '#', '^' };
+    const char punctuation[] = { '.', ';', ':', '(', ')', '!', '?', ',', '&', '*', '/', '<', '>', '?', '\"', '\'',  '#', '^' };
 
     
     while(true) {
@@ -195,4 +195,3 @@ int main() {
     
     return 0;
 }
-// 4 var
