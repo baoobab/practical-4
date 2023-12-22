@@ -70,6 +70,13 @@ void equateArrays(char convertibleArr[], char subArr[]) {
     }
 }
 
+void getSubstring(const char arr[], char substring[], int start, int end) {
+    int subIdx = 0;
+    for (int i = start; i < end; i++, subIdx++) {
+        substring[subIdx] = arr[i];
+    }
+}
+
 
 int main() {
     setlocale(LC_ALL, "Russian");
@@ -129,39 +136,22 @@ int main() {
                 break;
             }
             case 3: {
-                char currentWord[MAX_SIZE] = {};
-                if (!checkSymbolInWord(punctuation, sequence[0])) {
-                    currentWord[0] = sequence[0];
-                }
-                int curIndex = 1;
-                for (int i = 1; i < getWordLength(sequence) - 1; i++) {
-                    if (sequence[i] != ' ') {
-                        if (!checkSymbolInWord(punctuation, sequence[i]) || 
-                        (checkSymbolInWord(punctuation, sequence[i]) && 
-                        (sequence[i - 1] == ' ' || 
-                        sequence[i + 1] == ' '))) {
-                            currentWord[curIndex] = tolower(sequence[i]);
-                            curIndex++;
-                        }
-                    } else {
-                        currentWord[curIndex] = '\0';
-                        for (int j = 0; currentWord[j] != '\0'; j++) {
-                            if (countOccurrences(currentWord, currentWord[j]) > 1) {
-                                cout << currentWord << " ";
+                int startIndex = 0;
+                char ccurrentWord[MAX_SIZE] = {};
+
+                for (int i = 0; i < getWordLength(sequence) + 1; i++) {
+                    if (sequence[i] == ' ' || sequence[i] == '\0') {
+                        clearArray(ccurrentWord, MAX_SIZE);
+                        getSubstring(sequence, ccurrentWord, startIndex, i);
+                        startIndex = i + 1;
+                        for (int j = 0; j < getWordLength(ccurrentWord); j++) {
+                            if (countOccurrences(ccurrentWord, ccurrentWord[j]) > 1) {
+                                cout << ccurrentWord << " ";
                                 break;
                             }
                         }
-                        curIndex = 0;
-                        clearArray(currentWord, MAX_SIZE);
                     }
                 }
-                for (int j = 0; currentWord[j] != '\0'; j++) {
-                    if (countOccurrences(currentWord, currentWord[j]) > 1) {
-                        cout << currentWord << ".\n";
-                        break;
-                    }
-                }
-
                 break;
             }
             case 4: {   
