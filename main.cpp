@@ -34,10 +34,10 @@ int countOccurrences(const char* arr, char el) {
     return count;
 }
 
-bool findSubstring(const char* arr, const char* needle, const int arrSize, const int needleSize) {
+void findSubstring(const char* arr, const char* needle, const int arrSize, const int needleSize) {
     for (int i = 0; i <= arrSize - needleSize; ++i) {
         bool found = true;
-        for (size_t j = 0; j < needleSize; ++j) {
+        for (int j = 0; j < needleSize; ++j) {
             if (arr[i + j] != needle[j]) {
                 found = false;
                 break;
@@ -48,7 +48,6 @@ bool findSubstring(const char* arr, const char* needle, const int arrSize, const
             found = false;
         }
     }
-    return false;
 }
 
 char getCharForDigit(int digit) {
@@ -64,6 +63,13 @@ void replaceDigitsWithLetters(char arr[]) {
         }
     }
 }
+
+void equateArrays(char convertibleArr[], char subArr[]) {
+    for (int i = 0; convertibleArr[i] != '\0'; i++) {
+        convertibleArr[i] = subArr[i];
+    }
+}
+
 
 int main() {
     setlocale(LC_ALL, "Russian");
@@ -99,30 +105,27 @@ int main() {
             }
             case 2: {
                 cout << "Edited text:\n";
-                char seqtwo[MAX_SIZE];
-                char currentWord[MAX_SIZE] = {};
+                char editedSequence[MAX_SIZE] = {};
                 if (!checkSymbolInWord(punctuation, sequence[0])) {
-                    currentWord[0] = sequence[0];
+                    editedSequence[0] = sequence[0];
                 }
                 int curIndex = 1;
-                for (int i = 1; i < getWordLength(sequence) - 1; i++) {
+                for (int i = 1; i < getWordLength(sequence) + 1; i++) {
                     if (sequence[i] != ' ') {
                         if (!checkSymbolInWord(punctuation, sequence[i]) || 
                         (checkSymbolInWord(punctuation, sequence[i]) && 
                         (sequence[i - 1] == ' ' || 
                         sequence[i + 1] == ' '))) {
-                            currentWord[curIndex] = tolower(sequence[i]);
+                            editedSequence[curIndex] = tolower(sequence[i]);
                             curIndex++;
                         }
                     } else {
-                        currentWord[curIndex] = '\0';
-                        cout << currentWord << " ";
-                        curIndex = 0;
-                        clearArray(currentWord, MAX_SIZE);
+                        editedSequence[curIndex] = ' ';
+                        curIndex++;
                     }
                 }
-                cout << currentWord << ".\n";
-
+                cout << editedSequence << ".\n";
+                equateArrays(sequence, editedSequence);
                 break;
             }
             case 3: {
