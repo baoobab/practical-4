@@ -131,8 +131,10 @@ int main() {
                             curIndex++;
                         }
                     } else {
-                        editedSequence[curIndex] = ' ';
-                        curIndex++;
+                        if (editedSequence[curIndex - 1] != ' ') {
+                            editedSequence[curIndex] = ' ';
+                            curIndex++;
+                        }
                     }
                 }
                 cout << editedSequence << ".\n";
